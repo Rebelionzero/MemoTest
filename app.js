@@ -1,41 +1,32 @@
 (function(){
 
 	var initialize = function(){
-		var board = [];
+		var board = new Array(8);
+		var indexes = [0,1,2,3,4,5,6,7];
 
-		var card;
-		// Genera el tablero vacio
-		for (var i = 0; i < 8; i++) {
-			card = { index: i};
-			board.push(card);
+		indexes.takeOne = function(){
+			return this.splice(getRandomInt(0, this.length-1),1)[0];		
 		}
 
-		var boardCopy = board.slice(0);
+		function Card(){
+			this.twin =	null;
+			this.image = 0;
+		}
+
+		var fstCard = null , sndCard = null;
+		for (var j = 0; j < 4; j++) {				
+			fstCard = new Card();
+			sndCard = new Card();
+
+			fstCard.twin = sndCard;
+			fstCard.image = j;
 		
-		var place;
-		// Asigna los valores a cada tarjeta
-		for (var j = 0; j < 4; j++) {
-			
-			console.log(getRandomInt(0, boardCopy.length));
-			var firstCard = boardCopy.pop(getRandomInt(0, boardCopy.length-1));
-			var sndCard = boardCopy.pop(getRandomInt(0, boardCopy.length-1));
-			console.log(firstCard.index);
-			console.log(sndCard.index);
-
-
-			/*console.log(firstCard);
-			console.log(sndCard);*/
-			firstCard.relation = sndCard;
-			firstCard.image = j;
-
-			sndCard.relation = firstCard;
+			sndCard.twin = fstCard;
 			sndCard.image = j;
 
-			board[firstCard.index] = firstCard;
-			board[sndCard.index] = sndCard;
+			board[indexes.takeOne()] = fstCard;
+			board[indexes.takeOne()] = sndCard;
 		};	
-
-		console.log(board);
 	};
 
 	initialize();
