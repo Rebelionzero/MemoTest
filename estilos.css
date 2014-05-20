@@ -1,0 +1,23 @@
+.tablero {
+	background: #2E2E2E;
+	padding: 10px;
+	overflow: hidden;
+	height: 200px;
+	width: 200px;
+}
+
+.tablero p {
+	color: #fff;
+	background: #1A5E9E;
+	margin: 0 0 10px 10px;
+	text-align: center;
+	line-height: 50px;
+	box-shadow: 0 0 5px #cfcfcf inset;
+	float: left;
+	width: 50px;
+	height: 50px;
+}
+
+.tablero p:nth-child(3n+1) {
+	margin-left: 0;
+}
