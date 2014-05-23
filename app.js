@@ -1,31 +1,25 @@
 (function(){
-
-	var initialize = function(){
-		var board = new Array(8);
-		var indexes = [0,1,2,3,4,5,6,7];
+	var board = [];
+	var min = 0;
+	var max = 7;
+	var initialize = function(){		
 		var fstCard = null , sndCard = null;
-
-		indexes.takeOne = function(){
-			return this.splice(getRandomInt(0, this.length-1),1)[0];		
-		}
-
-		function Card(){
-			this.twin =	null;
-			this.image = 0;
-		}
+		var posicion;
 		
+		//return this.splice(getRandomInt(0, this.length-1),1)[0];
+
+			
 		for (var j = 0; j < 4; j++) {				
-			fstCard = new Card();
-			sndCard = new Card();
+			fstCard = {};
+			fstCard.id = j;
 
-			fstCard.twin = sndCard;
-			fstCard.image = j;
-		
-			sndCard.twin = fstCard;
-			sndCard.image = j;
+			sndCard = clone(fstCard);
 
-			board[indexes.takeOne()] = fstCard;
-			board[indexes.takeOne()] = sndCard;
+			posicionAleatoria(fstCard);
+			posicionAleatoria(sndCard);
+			
+			fstCard = null;
+			sndCard = null;
 		};
 		
 		return board;
@@ -33,7 +27,28 @@
 
 	// funcion global para ser usada en ui.js
 	listaCartas = initialize();
+	console.log(listaCartas);
 	
+	function clone(obj) {
+   		var target = {};
+		for (var i in obj) {
+			if (obj.hasOwnProperty(i)) {
+				target[i] = obj[i];
+			}
+		}
+		return target;
+	}
+
+	function posicionAleatoria(tarjeta){
+		posicion = getRandomInt(min,max);
+		if(board[posicion] == undefined){				
+			board[posicion] = tarjeta;
+			return false;
+		}else{				
+			posicionAleatoria(tarjeta);
+		}		
+
+	}
 
 	function getRandomInt (min, max) {
 	   return Math.floor(Math.random() * (max - min + 1)) + min;

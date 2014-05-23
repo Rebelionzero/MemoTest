@@ -5,7 +5,7 @@ $(document).ready(function(){
 	});
 
 	function crearCartas(carta){		
-		$(".tablero").append("<p>" + carta.image  + "</p>");
+		$(".tablero").append("<p>" + carta.id  + "</p>");
 	}
 
 });
